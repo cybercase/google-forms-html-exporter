@@ -3,14 +3,6 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip({trigger: 'manual'})
 })
 
-$('#gifdiv').click(function () {
-    if ($(this).find('img').attr('src') == 'images/preview.jpg') {
-        $(this).find('img').attr('src', 'images/preview.gif');
-    } else {
-        $(this).find('img').attr('src', 'images/preview.jpg');
-    }
-});
-
 $('#example-action').click((event) => {
     event.preventDefault()
     let exampleUrl = $('#example-url').attr('href');
