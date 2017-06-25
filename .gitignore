@@ -1,0 +1,9 @@
+node_modules
+dist
+.tmp
+bower_components
+test/bower_components
+/bin
+/pkg
+vendor/src
+vendor/pkg
