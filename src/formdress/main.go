@@ -75,6 +75,7 @@ func FormDressHandler(w http.ResponseWriter, r *http.Request) {
 var addr = flag.String("l", "0.0.0.0:8000", "Bind Address")
 var distDir = flag.String("d", "dist", "Static Assets Directory")
 var fetch = flag.String("f", "", "Just fetch the Google Form data")
+var prefixToStrip = flag.String("p", "", "URL prefix to strip")
 
 var httpClient = http.Client{
 	Timeout: 30 * time.Second,
@@ -111,8 +112,8 @@ func main() {
 	signal.Notify(stop, os.Interrupt, os.Kill)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/formdress", FormDressHandler)
-	mux.Handle("/", http.FileServer(http.Dir(*distDir)))
+	mux.Handle(*prefixToStrip+"/formdress", http.StripPrefix(*prefixToStrip, http.HandlerFunc(FormDressHandler)))
+	mux.Handle(*prefixToStrip+"/", http.StripPrefix(*prefixToStrip, http.FileServer(http.Dir(*distDir))))
 
 	server := &http.Server{Addr: *addr, Handler: mux}
 	go func() {
