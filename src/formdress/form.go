@@ -233,13 +233,13 @@ func NewFieldFromData(data []interface{}) Field {
 
 	case FieldImage:
 		extra := toSlice(data[6])
-		opts := toSlice(extra[6])
+		opts := toSlice(extra[2])
 		f.Widgets = []Widget{{
 			"id": toString(extra[0]),
 			"res": Option{
 				"w":        toInt(opts[0]),
 				"h":        toInt(opts[1]),
-				"showText": toBool(opts[2]),
+				"showText": f.Desc != "",
 			},
 		}}
 
