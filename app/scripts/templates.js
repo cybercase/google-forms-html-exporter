@@ -165,6 +165,18 @@ let bootstrapForm = Handlebars.compile(`
             <input type="time" id="{{f.widgets.0.id}}" placeholder="{{ timePlaceholder }}" class="form-control" {{#if f.widgets.0.required}}required{{/if}}>
             {{/ifType}}
 
+            {{#ifType f 'image'}}
+            {{#if f.widgets.0.src}}
+                <img src="{{f.widgets.0.src}}" style="max-width: 100%;">
+            {{/if}}
+            {{/ifType}}
+
+            {{#ifType f 'video'}}
+            {{#if f.widgets.0.src}}
+                <iframe src="{{f.widgets.0.src}}" style="width: 320px; height: 180px;"></iframe>
+            {{/if}}
+            {{/ifType}}
+
         </div>
     </fieldset>
     {{/each}}

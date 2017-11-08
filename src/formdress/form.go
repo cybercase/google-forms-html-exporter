@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -285,6 +286,20 @@ func (f *Form) UnmarshalJSON(b []byte) error {
 
 var InvalidForm = errors.New("Invalid Form")
 
+func ExtractImages(doc *goquery.Document, form *Form) {
+	// Fetch images src from the document
+	for _, w := range form.Fields {
+		if w.TypeID == FieldImage {
+			imgEl := doc.Find("[data-item-id='" + strconv.Itoa(w.ID) + "'] img")
+			w.Widgets[0]["src"] = imgEl.AttrOr("src", "")
+		} else if w.TypeID == FieldVideo {
+			iframeEl := doc.Find("[data-item-id='" + strconv.Itoa(w.ID) + "'] iframe")
+			w.Widgets[0]["src"] = iframeEl.AttrOr("src", "")
+		}
+
+	}
+}
+
 func FormExtract(content io.Reader) (*Form, error) {
 	doc, err := goquery.NewDocumentFromReader(content)
 	if err != nil {
@@ -317,6 +332,8 @@ func FormExtract(content io.Reader) (*Form, error) {
 	form := &Form{}
 	json.Unmarshal([]byte(s), form)
 	form.Fbzx = fbzx
+
+	ExtractImages(doc, form)
 
 	return form, nil
 }
