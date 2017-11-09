@@ -144,7 +144,7 @@ func NewFieldFromData(data []interface{}) Field {
 				option["href"] = toString(o[2])
 			}
 			if len(o) > 4 {
-				option["custom"] = toString(o[4])
+				option["custom"] = toBool(o[4])
 			}
 
 			opts = append(opts, option)
