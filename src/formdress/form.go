@@ -135,11 +135,19 @@ func NewFieldFromData(data []interface{}) Field {
 		opts := []Option{}
 		for _, opt := range options {
 			o := toSlice(opt)
-			opts = append(opts, Option{
-				"label":  toString(o[0]),
-				"custom": toBool(o[4]),
-				"href":   toString(o[2]),
-			})
+
+			option := Option{
+				"label": toString(o[0]),
+			}
+			// Handle the case for missing information in option object
+			if len(o) > 2 {
+				option["href"] = toString(o[2])
+			}
+			if len(o) > 4 {
+				option["custom"] = toString(o[4])
+			}
+
+			opts = append(opts, option)
 		}
 
 		f.Widgets = []Widget{{
