@@ -61,6 +61,7 @@ func FormDressHandler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	// Extract data
+	log.Println("Fetching " + url)
 	form, err := FormExtract(resp.Body)
 	if err != nil {
 		JSONError(w, err, http.StatusInternalServerError)
@@ -88,6 +89,7 @@ func FetchAndExit(url string) {
 	}
 	defer res.Body.Close()
 
+	log.Println("Fetching " + url)
 	form, err := FormExtract(res.Body)
 	if err != nil {
 		log.Fatal(err)
