@@ -34,7 +34,6 @@ Handlebars.registerHelper('legend', function(array, last) {
 })
 
 Handlebars.registerHelper('datePlaceholder', function () {
-    console.log('EHI')
     return new Date().toLocaleDateString()
 })
 
