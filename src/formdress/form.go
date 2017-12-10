@@ -44,12 +44,13 @@ type Field struct {
 type Fields []Field
 
 type Form struct {
-	Title  string `json:"title"`
-	Header string `json:"header"`
-	Desc   string `json:"desc"`
-	Path   string `json:"path"`
-	Action string `json:"action"`
-	Fbzx   string `json:"fbzx"`
+	Title        string `json:"title"`
+	Header       string `json:"header"`
+	Desc         string `json:"desc"`
+	Path         string `json:"path"`
+	Action       string `json:"action"`
+	Fbzx         string `json:"fbzx"`
+	SectionCount int    `json:"sectionCount"`
 
 	Fields Fields `json:"fields"`
 }
@@ -285,6 +286,12 @@ func (f *Form) UnmarshalJSON(b []byte) error {
 	extraData := toSlice(data[1])
 
 	f.Fields = NewFieldsFromData(toSlice(extraData[1]))
+	f.SectionCount = 1
+	for _, field := range f.Fields {
+		if field.TypeID == FieldSection {
+			f.SectionCount++
+		}
+	}
 
 	f.Desc = toString(extraData[0])
 	f.Header = toString(extraData[8])

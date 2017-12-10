@@ -25,6 +25,10 @@ Handlebars.registerHelper('fieldtype', function(typeid) {
     return FieldTypes[typeid]
 })
 
+Handlebars.registerHelper('countTo', function(num) {
+    return [...Array(num).keys()].join(',')
+})
+
 Handlebars.registerHelper('legend', function(array, last) {
     if (last) {
         return array[array.length-1].label
@@ -183,6 +187,15 @@ let bootstrapForm = Handlebars.compile(`
     <!-- emptyline -->
     <input type="hidden" name="fvv" value="1">
     <input type="hidden" name="fbzx" value="{{fbzx}}">
+
+    <!--
+        CAVEAT: In multipages (multisection) forms, *pageHistory* field tells to google what sections we've currently completed.
+        This usually starts as "0" for the first page, then "0,1" in the second page... up to "0,1,2..N" in n-th page.
+        Keep this in mind if you plan to change this code to recreate any sort of multipage-feature in your exported form.
+
+        We're setting this to the total number of pages in this form because we're sending all fields from all the section together.
+    -->
+    <input type="hidden" name="pageHistory" value="{{ countTo sectionCount }}">
 
     <!-- emptyline -->
     <input class="btn btn-primary" type="submit" value="Submit">
