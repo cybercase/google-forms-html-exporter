@@ -51,6 +51,8 @@ var formTests = []struct {
 			"header": "Short Test",
 			"desc": "description",
 			"path": "/forms",
+			"sectionCount": 1,
+			"askEmail": false,
 			"action": "e/1FAIpQLSdjZK2A_L9zUprCxOJdvvjexmNmxwmZCN6vMmTXAIZhJqUg3w",
 			"fields": [
 				{

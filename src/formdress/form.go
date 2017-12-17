@@ -51,6 +51,7 @@ type Form struct {
 	Action       string `json:"action"`
 	Fbzx         string `json:"fbzx"`
 	SectionCount int    `json:"sectionCount"`
+	AskEmail     bool   `json:"askEmail"`
 
 	Fields Fields `json:"fields"`
 }
@@ -295,6 +296,10 @@ func (f *Form) UnmarshalJSON(b []byte) error {
 
 	f.Desc = toString(extraData[0])
 	f.Header = toString(extraData[8])
+
+	if otherExtraData := toSlice(extraData[10]); otherExtraData != nil && len(otherExtraData) >= 4 {
+		f.AskEmail = toInt(otherExtraData[4]) == 1
+	}
 
 	return nil
 }
