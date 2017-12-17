@@ -56,6 +56,16 @@ let bootstrapForm = Handlebars.compile(`
         <h2>{{ title }}<br><small>{{desc}}</small></h2>
     </fieldset>
     {{/if}}
+
+    {{#if askEmail}}
+    <fieldset>
+        <legend for="{{emailAddress}}">Email</legend>
+        <div class="form-group">
+            <input id="emailAddress" type="email" name="emailAddress" class="form-control" required>
+        </div>
+    </fieldset>
+    {{/if }}
+
     {{#each fields as |f|}}
     <!-- emptyline -->
     <!-- emptyline -->
