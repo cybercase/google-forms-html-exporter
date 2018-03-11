@@ -12,6 +12,7 @@ const FieldTypes = [
     'time', // 10
     'image', // 11
     'video', // 12
+    'upload', // 13
 ]
 
 Handlebars.registerHelper('ifType', function(field, typename, options) {
@@ -188,6 +189,10 @@ let bootstrapForm = Handlebars.compile(`
             {{#if f.widgets.0.src}}
                 <iframe src="{{f.widgets.0.src}}" style="width: 320px; height: 180px;"></iframe>
             {{/if}}
+            {{/ifType}}
+
+            {{#ifType f 'upload'}}
+            <div>File upload is not yet implemented. Any help is welcome!</div>
             {{/ifType}}
 
         </div>

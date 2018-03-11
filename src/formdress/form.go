@@ -27,6 +27,7 @@ const (
 	FieldTime                 = 10
 	FieldImage                = 11
 	FieldVideo                = 12
+	FieldUpload               = 13
 )
 
 type Widget map[string]interface{}
@@ -251,6 +252,20 @@ func NewFieldFromData(data []interface{}) Field {
 				"w":        toInt(opts[0]),
 				"h":        toInt(opts[1]),
 				"showText": f.Desc != "",
+			},
+		}}
+
+	case FieldUpload:
+		widgets := toSlice(data[4])
+		widget := toSlice(widgets[0])
+		options := toSlice(widget[10])
+		f.Widgets = []Widget{{
+			"id":       toString(widget[0]),
+			"required": toBool(widget[2]),
+			"options": Option{
+				"types":          toSlice(options[1]),
+				"maxUploads":     toInt(options[2]),
+				"maxSizeInBytes": toString(options[3]),
 			},
 		}}
 
