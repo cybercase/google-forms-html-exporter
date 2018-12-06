@@ -1,1 +1,1 @@
-"use strict";window.config={serverAddress:"http://46.101.200.59/google-forms-html-exporter"};
+"use strict";window.config={serverAddress:"https://google-form-exporter.herokuapp.com"};
