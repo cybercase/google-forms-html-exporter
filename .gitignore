@@ -5,5 +5,4 @@ bower_components
 test/bower_components
 /bin
 /pkg
-vendor/src
 vendor/pkg
