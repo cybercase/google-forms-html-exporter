@@ -1,7 +1,7 @@
 # Google Forms Exporter
 ## Convert any Google Form to an HTML form
 
-_Live @_ http://stefano.brilli.me/google-forms-html-exporter/
+_Live @_ https://stefano.brilli.me/google-forms-html-exporter/
 
 
 
