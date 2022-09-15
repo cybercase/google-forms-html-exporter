@@ -1,3 +1,3 @@
 window.config = {
-    serverAddress: 'https://google-form-exporter.herokuapp.com'
+    serverAddress: 'https://lobster-app-wkszu.ondigitalocean.app'
 }

@@ -1,1 +1,1 @@
-"use strict";window.config={serverAddress:"https://google-form-exporter.herokuapp.com"};
+"use strict";window.config={serverAddress:"https://lobster-app-wkszu.ondigitalocean.app"};
