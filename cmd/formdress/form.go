@@ -312,7 +312,7 @@ func (f *Form) UnmarshalJSON(b []byte) error {
 	f.Desc = toString(extraData[0])
 	f.Header = toString(extraData[8])
 
-	if otherExtraData := toSlice(extraData[10]); otherExtraData != nil && len(otherExtraData) >= 4 {
+	if otherExtraData := toSlice(extraData[10]); otherExtraData != nil && len(otherExtraData) > 4 {
 		f.AskEmail = toInt(otherExtraData[4]) == 1
 	}
 
